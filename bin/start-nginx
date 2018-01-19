@@ -1,0 +1,19 @@
+#!/bin/bash
+
+ORIGIN="$(pwd)"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
+cd ..
+DIR="$(pwd)"
+cd $ORIGIN
+
+docker stop rab_nginx
+docker rm rab_nginx
+docker build $DIR/docker/nginx -t rab_nginx
+docker run \
+  --name rab_nginx \
+  -m 512m \
+  -p 80:80 \
+  -v $DIR/docker/nginx/www:/www \
+  --add-host=parent:`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | sed -e '$!d'` \
+  rab_nginx:latest

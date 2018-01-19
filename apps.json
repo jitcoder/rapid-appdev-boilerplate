@@ -1,0 +1,20 @@
+{
+  "apps": [
+    {
+      "name": "mongo",
+      "script": "./bin/start-mongo",
+      "exec_interpreter": "bash",
+      "exec_mode": "fork_mode"
+    },
+    {
+      "name": "api",
+      "script": "./packages/example-api/app.js"
+    },
+    {
+      "name": "nginx",
+      "script": "./bin/start-nginx",
+      "exec_interpreter": "bash",
+      "exec_mode": "fork_mode"
+    }
+  ]
+}

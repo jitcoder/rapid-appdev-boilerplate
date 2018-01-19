@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./bin/stop
+pm2 start apps.json
