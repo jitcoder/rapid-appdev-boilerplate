@@ -2,3 +2,7 @@
 
 ./bin/stop
 pm2 start apps.json
+
+sleep 3
+
+pm2 restart api
